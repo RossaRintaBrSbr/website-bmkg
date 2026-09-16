@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Layanan Publik BMKG Deli Serdang</title>
+<style>
+:root{--navy:#002b49;--blue:#0072ce;--orange:#f59a16;--green:#198754;--mist:#f4f7fa;--ink:#142c3d;--muted:#607384;--line:#d9e3e9;--shadow:0 14px 34px #002b4917}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--mist);color:var(--ink);font:15px/1.55 Inter,Segoe UI,Arial,sans-serif}
+.container{width:min(1140px,calc(100% - 36px));margin:auto}
+.topline{height:5px;background:linear-gradient(90deg,#13a8e8 0 28%,#fff 28% 37%,#2b9d4f 37% 65%,#fff 65% 74%,var(--orange) 74%)}
+header{position:sticky;top:0;z-index:10;background:#fffffff2;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:850;line-height:1.15}
+.brand small{display:block;font-size:10px;color:var(--muted)}
+.logo{width:46px;height:46px;object-fit:contain;flex:none}
+.links{display:flex;gap:2px}
+.links button,.menu{border:0;background:transparent;color:#315064;font:inherit;font-weight:700;padding:9px;border-radius:7px;cursor:pointer}
+.links button:hover,.links button.active{color:var(--blue);background:#e8f4fc}
+.menu{display:none;font-size:22px}
+.page{display:none;padding:40px 0 62px;animation:in .3s}
+.page.active{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}
+to{opacity:1;transform:none}
+}
+.hero{background:linear-gradient(120deg,#002b49eF,#0066a4dc),radial-gradient(#30b6ed 1px,transparent 1px);background-size:auto,23px 23px;color:#fff;min-height:398px;display:grid;align-items:center}
+.hero>div{padding:62px 0}
+.eyebrow{color:#c8edff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.eyebrow:before{content:"";display:inline-block;width:25px;height:3px;background:var(--orange);vertical-align:middle;margin-right:8px}
+h1{font-size:clamp(32px,5vw,51px);line-height:1.1;margin:13px 0 16px}
+h2{font-size:clamp(25px,4vw,33px);line-height:1.2;color:var(--navy);margin:0 0 8px}
+h3{color:var(--navy);margin:0 0 7px}
+.hero p{font-size:17px;max-width:650px;color:#d8ecf6}
+.btn{border:0;border-radius:8px;background:var(--blue);color:white;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:7px;box-shadow:0 4px 12px #0072ce33}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.orange{background:var(--orange);color:#27343b}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.quick{margin-top:-31px;position:relative}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 17px #002b490d}
+.quick .card{border-top:4px solid var(--blue)}
+.quick .card:nth-child(2){border-color:var(--orange)}
+.quick .card:nth-child(3){border-color:var(--green)}
+.icon{font-size:27px}
+.muted,.card p{color:var(--muted)}
+.quick .btn{width:100%;margin-top:7px}
+.live-section{margin-top:42px}
+.section-head{text-align:center;max-width:700px;margin:0 auto 25px}
+.live-feed{display:grid;grid-auto-flow:column;grid-auto-columns:calc(50% - 9px);overflow:auto;scroll-snap-type:x mandatory;gap:18px;padding:2px 2px 12px;scroll-behavior:smooth}
+.live-feed::-webkit-scrollbar{height:8px}
+.live-feed::-webkit-scrollbar-thumb{background:#bfd2df;border-radius:9px}
+.alert-card{scroll-snap-align:start;min-height:195px;background:var(--navy);color:#fff;border-radius:14px;padding:24px}
+.alert-card.warning{background:#8b3f00}
+.alert-card h3{color:#fff}
+.alert-card .source{color:#c8e8f8;font-size:12px;font-weight:700}
+.alert-card p{margin:9px 0}
+.alert-card a{color:#fff;font-weight:800}
+.feed-nav{display:flex;gap:8px;justify-content:flex-end;margin:6px 0}
+.circle{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;font-size:20px}
+.form-layout{display:grid;grid-template-columns:275px 1fr;gap:24px}
+.side{background:var(--navy);color:#dcecf5;border-radius:14px;padding:23px;height:max-content}
+.side h3{color:#fff}
+.side li{margin:8px 0}
+.form-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:27px;box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.field{display:grid;gap:6px}
+.full{grid-column:1/-1}
+label{font-weight:750;color:#29495d;font-size:14px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd9e1;border-radius:7px;font:inherit;color:var(--ink);background:white}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px #dceffa}
+textarea{min-height:95px;resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.check{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:8px;cursor:pointer}
+.check input{width:auto}
+.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}
+.form-actions small{color:var(--muted)}
+.tracking{max-width:780px;margin:auto}
+.track-box{display:flex;gap:9px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow)}
+.track-box input{border:0}
+.timeline{display:none;margin-top:25px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:27px}
+.timeline.show{display:block}
+.status-pill{display:inline-block;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:800;background:#eef2f5;color:#476071}
+.status-pill.wait{background:#fff3d4;color:#7d5600}
+.status-pill.ok{background:#dff5e7;color:#17623c}
+.status-pill.no{background:#ffe2e6;color:#94233a}
+.step{padding:0 0 22px 31px;border-left:2px solid #cddae2;position:relative;color:var(--muted)}
+.step:last-of-type{border:0}
+.step:before{content:"";position:absolute;left:-8px;top:2px;width:12px;height:12px;border-radius:50%;background:#a7b7c1;border:3px solid white;box-shadow:0 0 0 2px #a7b7c1}
+.step.done:before{background:var(--green);box-shadow:0 0 0 2px var(--green)}
+.step.current:before{background:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+.step b{display:block;color:var(--navy)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.contact-row{padding:14px;border-left:3px solid var(--blue);background:#fff;margin:10px 0}
+.map{border:0;width:100%;min-height:340px;border-radius:14px}
+.modal{display:none;position:fixed;inset:0;z-index:30;place-items:center;background:#001d33aa;padding:20px}
+.modal.show{display:grid}
+.modal-card{width:min(430px,100%);background:#fff;border-radius:15px;padding:29px;text-align:center}
+.ticket{background:#eaf6fd;padding:11px;border-radius:8px;font-size:18px;font-weight:850;margin:15px}
+.toast{display:none;position:fixed;z-index:40;bottom:17px;right:17px;background:#a92339;color:white;padding:12px 15px;border-radius:8px;box-shadow:var(--shadow)}
+.toast.show{display:block}
+footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size:13px}
+@media(max-width:820px){.menu{display:block}
+.links{display:none;position:absolute;left:0;right:0;top:76px;background:#fff;padding:12px 20px;border-bottom:1px solid var(--line);flex-direction:column}
+.links.show{display:flex}
+.links button{text-align:left}
+.grid3,.form-layout,.contact-grid{grid-template-columns:1fr}
+.quick{margin-top:0}
+.live-feed{grid-auto-columns:90%}
+.side{position:static}
+}
+@media(max-width:540px){.form-grid{grid-template-columns:1fr}
+.form-card{padding:19px}
+.form-actions,.track-box{flex-direction:column;align-items:stretch}
+.brand{font-size:13px}
+}
+
+</style>
+</head>
+<body>
+<div class="topline">
+</div>
+<header>
+<div class="container nav">
+<div class="brand">
+<img class="logo" src="https://cews.bmkg.go.id/tempatirk/interface/logo_bmkg.png" alt="Logo resmi BMKG Indonesia">
+<span>BMKG<small>STASIUN GEOFISIKA KELAS 1 DELI SERDANG</small>
+</span>
+</div>
+<button class="menu" id="menuBtn" aria-label="Buka menu">☰</button>
+<nav class="links" id="navLinks">
+<button class="active" data-page="home">Beranda</button>
+<button data-page="registration">Pendaftaran</button>
+<button data-page="data-request">Permintaan Data</button>
+<button data-page="complaint">Aduan</button>
+<button data-page="tracking">Cek Status</button>
+<button data-page="contact">Kontak</button>
+<a href="admin.html">Admin</a>
+</nav>
+</div>
+</header>
+<main>
+<section id="home" class="page active">
+<div class="hero">
+<div class="container">
+<span class="eyebrow">Pelayanan publik digital</span>
+<h1>Layanan Informasi & Data<br>Geofisika Terpadu</h1>
+<p>Ajukan kunjungan, permintaan data, atau laporan kondisi di sekitar Anda dengan mudah dan transparan.</p>
+<button class="btn orange" data-go="data-request">Ajukan permintaan data →</button>
+</div>
+</div>
+<div class="container">
+<div class="grid3 quick">
+<article class="card">
+<div class="icon">🏫</div>
+<h3>Daftar Kunjungan</h3>
+<p>Kunjungan edukasi, magang/PKL, atau penelitian.</p>
+<button class="btn" data-go="registration">Mulai pendaftaran</button>
+</article>
+<article class="card">
+<div class="icon">◉</div>
+<h3>Minta Data Geofisika</h3>
+<p>Permohonan data gempa bumi dan petir.</p>
+<button class="btn" data-go="data-request">Minta data</button>
+</article>
+<article class="card">
+<div class="icon">⚑</div>
+<h3>Aduan Masyarakat</h3>
+<p>Sampaikan kondisi atau kejadian di wilayah Anda.</p>
+<button class="btn" data-go="complaint">Kirim aduan</button>
+</article>
+</div>
+<section class="live-section">
+<div class="section-head">
+<h2>Informasi Terkini BMKG</h2>
+<p>Data gempa dan peringatan dini resmi. Geser kartu untuk melihat informasi lainnya.</p>
+</div>
+<div class="live-feed" id="liveFeed">
+<article class="alert-card">
+<span class="source">MEMUAT DATA RESMI BMKG…</span>
+<h3>Informasi terkini</h3>
+<p>Silakan tunggu sebentar.</p>
+</article>
+</div>
+<div class="feed-nav">
+<button class="circle" id="feedPrev">‹</button>
+<button class="circle" id="feedNext">›</button>
+</div>
+</section>
+</div>
+</section>
+<section id="registration" class="page">
+<div class="container">
+<div class="section-head">
+<h2>Pendaftaran Layanan</h2>
+<p>Kunjungan edukasi, magang/PKL, dan penelitian.</p>
+</div>
+<div class="form-layout">
+<aside class="side">
+<h3>Persiapkan dokumen</h3>
+<ul>
+<li>Surat pengantar instansi.</li>
+<li>Ajukan minimal 14 hari sebelum kegiatan.</li>
+<li>Kontak harus aktif.</li>
+</ul>
+</aside>
+<form class="form-card" id="registrationForm">
+<div class="form-grid">
+<div class="field full">
+<label for="regType">Jenis pendaftaran</label>
+<select id="regType" required>
+<option value="">Pilih jenis pendaftaran</option>
+<option>Kunjungan Edukasi Sekolah/Instansi</option>
+<option>Magang/PKL</option>
+<option>Penelitian</option>
+</select>
+</div>
+<div class="field">
+<label for="regName">Nama lengkap / instansi</label>
+<input id="regName" required>
+</div>
+<div class="field">
+<label for="regEmail">Email</label>
+<input id="regEmail" type="email" required>
+</div>
+<div class="field">
+<label for="regPhone">Nomor WhatsApp</label>
+<input id="regPhone" type="tel" required>
+</div>
+<div class="field">
+<label for="regDate">Tanggal pelaksanaan</label>
+<input id="regDate" type="date" required>
+</div>
+<div class="field">
+<label for="regCount">Jumlah peserta</label>
+<input id="regCount" type="number" min="1" required>
+</div>
+<div class="field">
+<label for="regFile">Surat pengantar</label>
+<input id="regFile" type="file" required accept=".pdf,.jpg,.jpeg,.png">
+</div>
+</div>
+<div class="form-actions">
+<button class="btn" type="submit">Kirim pendaftaran</button>
+<small>PDF, JPG, PNG · maks. 5 MB.</small>
+</div>
+</form>
+</div>
+</div>
+</section>
+<section id="data-request" class="page">
+<div class="container">
+<div class="section-head">
+<h2>Permintaan Data Geofisika</h2>
+<p>Lengkapi data agar dapat diproses oleh petugas.</p>
+</div>
+<div class="form-layout">
+<aside class="side">
+<h3>Ketentuan singkat</h3>
+<ul>
+<li>Data diverifikasi sesuai ketentuan BMKG.</li>
+<li>Gunakan data sesuai tujuan yang diajukan.</li>
+<li>Pantau dengan kode tiket.</li>
+</ul>
+</aside>
+<form class="form-card" id="dataForm">
+<div class="form-grid">
+<div class="field full">
+<label>Jenis data</label>
+<div class="checks">
+<label class="check">
+<input type="checkbox" name="dataType" value="Gempa Bumi">Gempa Bumi</label>
+<label class="check">
+<input type="checkbox" name="dataType" value="Petir">Petir</label>
+</div>
+</div>
+<div class="field">
+<label for="startDate">Tanggal mulai</label>
+<input id="startDate" type="date" required>
+</div>
+<div class="field">
+<label for="endDate">Tanggal selesai</label>
+<input id="endDate" type="date" required>
+</div>
+<div class="field">
+<label for="area">Wilayah / koordinat</label>
+<input id="area" required>
+</div>
+<div class="field">
+<label for="purpose">Tujuan penggunaan</label>
+<select id="purpose" required>
+<option value="">Pilih tujuan</option>
+<option>Riset</option>
+<option>Komersial</option>
+<option>Pemerintahan</option>
+</select>
+</div>
+<div class="field">
+<label for="applicant">Nama pemohon</label>
+<input id="applicant" required>
+</div>
+<div class="field">
+<label for="identity">NIK / NIM</label>
+<input id="identity" required>
+</div>
+<div class="field">
+<label for="institution">Instansi / universitas</label>
+<input id="institution" required>
+</div>
+<div class="field">
+<label for="dataEmail">Email</label>
+<input id="dataEmail" type="email" required>
+</div>
+<div class="field">
+<label for="dataPhone">No. HP</label>
+<input id="dataPhone" type="tel" required>
+</div>
+<div class="field">
+<label for="supportFile">Lain-lain</label>
+<input id="supportFile" type="file" required accept=".pdf,.jpg,.jpeg,.png">
+</div>
+</div>
+<div class="form-actions">
+<button class="btn" type="submit">Ajukan permintaan data</button>
+<small>PDF, JPG, PNG · maks. 5 MB.</small>
+</div>
+</form>
+</div>
+</div>
+</section>
+<section id="complaint" class="page">
+<div class="container">
+<div class="section-head">
+<h2>Aduan Masyarakat</h2>
+<p>Laporkan kejadian atau kondisi yang Anda temukan. Untuk keadaan darurat, hubungi layanan darurat setempat terlebih dahulu.</p>
+</div>
+<div class="form-layout">
+<aside class="side">
+<h3>Aduan yang membantu</h3>
+<ul>
+<li>Sebutkan lokasi spesifik.</li>
+<li>Jelaskan waktu dan kondisi.</li>
+<li>Unggah foto bila ada.</li>
+</ul>
+</aside>
+<form class="form-card" id="complaintForm">
+<div class="form-grid">
+<div class="field">
+<label for="complaintName">Nama pelapor</label>
+<input id="complaintName" required>
+</div>
+<div class="field">
+<label for="complaintEmail">Email</label>
+<input id="complaintEmail" type="email" required>
+</div>
+<div class="field">
+<label for="complaintPhone">Nomor WhatsApp</label>
+<input id="complaintPhone" type="tel" required>
+</div>
+<div class="field">
+<label for="complaintType">Kategori kejadian</label>
+<select id="complaintType" required>
+<option value="">Pilih kategori</option>
+<option>Gempa bumi dirasakan</option>
+<option>Cuaca ekstrem</option>
+<option>Petir</option>
+<option>Informasi/layanan BMKG</option>
+<option>Lainnya</option>
+</select>
+</div>
+<div class="field">
+<label for="complaintLocation">Lokasi kejadian</label>
+<input id="complaintLocation" required placeholder="Desa/Kecamatan/Kabupaten">
+</div>
+<div class="field">
+<label for="complaintDate">Tanggal kejadian</label>
+<input id="complaintDate" type="date" required>
+</div>
+<div class="field full">
+<label for="complaintText">Uraian aduan</label>
+<textarea id="complaintText" required placeholder="Ceritakan kejadian atau kondisi yang Anda lihat.">
+</textarea>
+</div>
+<div class="field">
+<label for="complaintFile">Bukti pendukung (opsional)</label>
+<input id="complaintFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
+</div>
+</div>
+<div class="form-actions">
+<button class="btn" type="submit">Kirim aduan</button>
+<small>Anda menerima kode aduan untuk pelacakan.</small>
+</div>
+</form>
+</div>
+</div>
+</section>
+<section id="tracking" class="page">
+<div class="container tracking">
+<div class="section-head">
+<h2>Cek Status</h2>
+<p>Masukkan kode pendaftaran, tiket data, atau kode aduan Anda.</p>
+</div>
+<div class="track-box">
+<input id="ticketInput" placeholder="Contoh: REG-DS-2026-ABC123 atau ADU-DS-2026-ABC123">
+<button class="btn" id="trackBtn">Cek status</button>
+</div>
+<div class="timeline" id="timeline">
+<h3>Status untuk <span id="ticketValue">
+</span>
+</h3>
+<p>
+<span class="status-pill" id="statusPill">Memuat</span> <span class="muted" id="updatedText">
+</span>
+</p>
+<div class="step done">
+<b>Permohonan diterima</b>Permohonan sudah tercatat di sistem.</div>
+<div class="step current">
+<b id="statusTitle">Status admin</b>
+<span id="statusNote">Memuat informasi.</span>
+</div>
+<div class="step" id="replyStep">
+<b>Menunggu tindak lanjut</b>
+<span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="page">
+<div class="container">
+<div class="section-head">
+<h2>Informasi & Kontak</h2>
+<p>Hubungi kami untuk informasi layanan.</p>
+</div>
+<div class="contact-grid">
+<div class="card">
+<h3>BMKG Stasiun Geofisika Kelas 1 Deli Serdang</h3>
+<div class="contact-row">
+<b>Alamat</b>
+<br>Jl. Meteorologi Raya No. 17, Sampali, Percut Sei Tuan, Deli Serdang, Sumatera Utara 20371</div>
+<div class="contact-row">
+<b>Jam layanan</b>
+<br>Senin–Jumat, 08.00–16.00 WIB</div>
+<div class="contact-row">
+<b>Saluran resmi</b>
+<br>Gunakan kanal resmi BMKG untuk informasi kebencanaan terkini.</div>
+</div>
+<iframe class="map" title="Peta lokasi Deli Serdang" src="https://www.google.com/maps?q=Stasiun+Geofisika+Deli+Serdang&output=embed" loading="lazy">
+</iframe>
+</div>
+</div>
+</section>
+</main>
+<footer>© 2026 BMKG — Stasiun Geofisika Kelas 1 Deli Serdang · Data informasi terkini bersumber dari BMKG</footer>
+<div class="modal" id="modal">
+<div class="modal-card">
+<div style="font-size:45px">✓</div>
+<h2 id="modalTitle">Terkirim</h2>
+<p class="muted" id="modalText">
+</p>
+<div class="ticket" id="modalTicket">
+</div>
+<button class="btn" id="modalClose">Tutup</button>
+</div>
+</div>
+<div class="toast" id="toast">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const db = window.supabase.createClient('https://mbxmvlbfucsppjwnpmcb.supabase.co', 'sb_publishable_VL_PnIkZpShaPwo2X-D0ew_K1Z--daE');
+  const toast = $('toast');
+  const warn = message => { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4000); };
+  const showSuccess = (title, text, ticket) => { $('modalTitle').textContent = title; $('modalText').textContent = text; $('modalTicket').textContent = ticket; $('modal').classList.add('show'); };
+  const ticket = prefix => `${prefix}-DS-${new Date().getFullYear()}-${crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0, 6).toUpperCase()}`;
+
+  $('modalClose').onclick = () => $('modal').classList.remove('show');
+  $('modal').onclick = event => { if (event.target === $('modal')) $('modal').classList.remove('show'); };
+  const pages = document.querySelectorAll('.page'), links = document.querySelectorAll('[data-page]'), nav = $('navLinks');
+  const go = id => { pages.forEach(page => page.classList.toggle('active', page.id === id)); links.forEach(link => link.classList.toggle('active', link.dataset.page === id)); nav.classList.remove('show'); scrollTo({ top: 0, behavior: 'smooth' }); };
+  links.forEach(link => link.onclick = () => go(link.dataset.page));
+  document.querySelectorAll('[data-go]').forEach(button => button.onclick = () => go(button.dataset.go));
+  $('menuBtn').onclick = () => nav.classList.toggle('show');
+
+  const submit = (prefix, title, type) => async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!form.checkValidity()) return form.reportValidity();
+    const selected = [...form.querySelectorAll('input[name="dataType"]:checked')].map(input => input.value);
+    if (type === 'data' && !selected.length) return warn('Pilih minimal satu jenis data.');
+    if (type === 'data' && $('startDate').value > $('endDate').value) return warn('Tanggal selesai harus setelah tanggal mulai.');
+    const code = ticket(prefix);
+    const file = type === 'registration' ? $('regFile').files[0] : type === 'data' ? $('supportFile').files[0] : $('complaintFile').files[0];
+    const row = type === 'registration'
+      ? { ticket: code, request_type: 'pendaftaran', nama: $('regName').value, email: $('regEmail').value, no_hp: $('regPhone').value, instansi: $('regName').value, jenis_pendaftaran: $('regType').value, tanggal_mulai: $('regDate').value, file_name: file?.name || null, status: 'Menunggu Verifikasi' }
+      : type === 'data'
+        ? { ticket: code, request_type: 'permintaan_data', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, tanggal_selesai: $('endDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Proses Verifikasi' }
+        : { ticket: code, request_type: 'aduan', nama: $('complaintName').value, email: $('complaintEmail').value, no_hp: $('complaintPhone').value, kategori_aduan: $('complaintType').value, wilayah: $('complaintLocation').value, tanggal_mulai: $('complaintDate').value, uraian_aduan: $('complaintText').value, file_name: file?.name || null, status: 'Diterima' };
+    const button = form.querySelector('[type="submit"]');
+    const label = button.textContent;
+    button.disabled = true; button.textContent = 'Mengirim…';
+    const { error } = await db.from('service_requests').insert(row);
+    button.disabled = false; button.textContent = label;
+    if (error) return warn('Data gagal dikirim: ' + error.message);
+    showSuccess(title, 'Permohonan tersimpan. Simpan kode berikut untuk cek status.', code);
+    form.reset();
+  };
+  $('registrationForm').addEventListener('submit', submit('REG', 'Pendaftaran terkirim', 'registration'));
+  $('dataForm').addEventListener('submit', submit('REQ-DATA', 'Permintaan data terkirim', 'data'));
+  $('complaintForm').addEventListener('submit', submit('ADU', 'Aduan terkirim', 'complaint'));
+
+  async function track() {
+    const code = $('ticketInput').value.trim().toUpperCase();
+    if (!code) return warn('Masukkan kode tiket terlebih dahulu.');
+    const { data, error } = await db.rpc('cek_status_tiket', { kode: code });
+    const request = data?.[0];
+    if (error || !request) return warn('Kode tiket tidak ditemukan.');
+    $('ticketValue').textContent = request.ticket;
+    $('updatedText').textContent = `Diperbarui: ${new Date(request.updated_at).toLocaleString('id-ID')}`;
+    $('statusPill').textContent = request.status;
+    $('statusPill').className = 'status-pill wait';
+    $('statusTitle').textContent = `Status: ${request.status}`;
+    $('statusNote').textContent = request.catatan_admin || 'Belum ada catatan dari admin.';
+    $('timeline').classList.add('show');
+  }
+  $('trackBtn').onclick = track;
+  $('ticketInput').onkeydown = event => { if (event.key === 'Enter') track(); };
+  $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article>';
+  $('feedPrev').onclick = () => $('liveFeed').scrollBy({ left: -$('liveFeed').clientWidth * .8, behavior: 'smooth' });
+  $('feedNext').onclick = () => $('liveFeed').scrollBy({ left: $('liveFeed').clientWidth * .8, behavior: 'smooth' });
+})();
+</script>
+</body>
+</html>
