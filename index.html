@@ -135,7 +135,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <button data-page="complaint">Aduan</button>
 <button data-page="tracking">Cek Status</button>
 <button data-page="contact">Kontak</button>
-<a href="admin.html">Admin</a>
 </nav>
 </div>
 </header>
@@ -237,7 +236,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </div>
 <div class="field">
 <label for="regFile">Surat pengantar</label>
-<input id="regFile" type="file" required accept=".pdf,.jpg,.jpeg,.png">
+<input id="regFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
 </div>
 </div>
 <div class="form-actions">
@@ -317,7 +316,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </div>
 <div class="field">
 <label for="supportFile">Lain-lain</label>
-<input id="supportFile" type="file" required accept=".pdf,.jpg,.jpeg,.png">
+<input id="supportFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
 </div>
 </div>
 <div class="form-actions">
@@ -419,7 +418,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <span id="statusNote">Memuat informasi.</span>
 </div>
 <div class="step" id="replyStep">
-<b>Menunggu tindak lanjut</b>
+<b>Hasil atau jawaban belum tersedia</b>
 <span>
 </span>
 </div>
@@ -470,6 +469,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 (() => {
   const $ = id => document.getElementById(id);
   const db = window.supabase.createClient('https://mbxmvlbfucsppjwnpmcb.supabase.co', 'sb_publishable_VL_PnIkZpShaPwo2X-D0ew_K1Z--daE');
+  const ticketKey = 'bmkg-ticket-saya';
   const toast = $('toast');
   const warn = message => { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4000); };
   const showSuccess = (title, text, ticket) => { $('modalTitle').textContent = title; $('modalText').textContent = text; $('modalTicket').textContent = ticket; $('modal').classList.add('show'); };
@@ -503,7 +503,8 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     const { error } = await db.from('service_requests').insert(row);
     button.disabled = false; button.textContent = label;
     if (error) return warn('Data gagal dikirim: ' + error.message);
-    showSuccess(title, 'Permohonan tersimpan. Simpan kode berikut untuk cek status.', code);
+    localStorage.setItem(ticketKey, code);
+    showSuccess(title, 'Kode tiket juga disimpan di browser ini. Simpan atau foto kode berikut untuk berjaga-jaga.', code);
     form.reset();
   };
   $('registrationForm').addEventListener('submit', submit('REG', 'Pendaftaran terkirim', 'registration'));
@@ -522,8 +523,18 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     $('statusPill').className = 'status-pill wait';
     $('statusTitle').textContent = `Status: ${request.status}`;
     $('statusNote').textContent = request.catatan_admin || 'Belum ada catatan dari admin.';
+    const reply = $('replyStep');
+    reply.className = 'step';
+    reply.innerHTML = '<b>Hasil atau jawaban belum tersedia</b><span>Admin masih memproses permintaan Anda.</span>';
+    if (request.response_file_url) {
+      reply.classList.add('done');
+      reply.innerHTML = '<b>Hasil permintaan tersedia</b><a class="btn" target="_blank" rel="noopener">Unduh hasil / jawaban PDF</a>';
+      reply.querySelector('a').href = request.response_file_url;
+    }
     $('timeline').classList.add('show');
   }
+  const savedTicket = localStorage.getItem(ticketKey);
+  if (savedTicket) $('ticketInput').value = savedTicket;
   $('trackBtn').onclick = track;
   $('ticketInput').onkeydown = event => { if (event.key === 'Enter') track(); };
   $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article>';
