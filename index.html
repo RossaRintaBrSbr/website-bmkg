@@ -13,7 +13,7 @@ body{margin:0;background:var(--mist);color:var(--ink);font:15px/1.55 Inter,Segoe
 .topline{height:5px;background:linear-gradient(90deg,#13a8e8 0 28%,#fff 28% 37%,#2b9d4f 37% 65%,#fff 65% 74%,var(--orange) 74%)}
 header{position:sticky;top:0;z-index:10;background:#fffffff2;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:850;line-height:1.15}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:850;line-height:1.15;border:0;background:transparent;cursor:pointer;text-align:left;padding:0}
 .brand small{display:block;font-size:10px;color:var(--muted)}
 .logo{width:46px;height:46px;object-fit:contain;flex:none}
 .links{display:flex;gap:2px}
@@ -37,7 +37,7 @@ h3{color:var(--navy);margin:0 0 7px}
 .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .btn.orange{background:var(--orange);color:#27343b}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.quick{margin-top:-31px;position:relative}
+.quick{margin-top:-31px;position:relative}.quick .dummy{border-top-color:#94a8b5}.dummy-label{display:inline-block;padding:3px 8px;border-radius:99px;background:#edf2f5;color:#496477;font-size:11px;font-weight:800}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 17px #002b490d}
 .quick .card{border-top:4px solid var(--blue)}
 .quick .card:nth-child(2){border-color:var(--orange)}
@@ -73,7 +73,7 @@ textarea{min-height:95px;resize:vertical}
 .checks{display:flex;flex-wrap:wrap;gap:8px}
 .check{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:8px;cursor:pointer}
 .check input{width:auto}
-.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}
+.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}.page-back{margin-bottom:18px;background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none}.status-files{display:grid;gap:10px;margin-top:18px}.file-panel{padding:14px;border:1px dashed #a8bfce;border-radius:9px;background:#f7fbfd}.file-panel b{display:block;color:var(--navy)}.modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;color:#36576b;font-size:25px;line-height:1;box-shadow:none;padding:4px}.modal-card{position:relative}.copy-note{font-size:12px;color:var(--muted);margin:0 0 10px}.hide{display:none!important}
 .form-actions small{color:var(--muted)}
 .tracking{max-width:780px;margin:auto}
 .track-box{display:flex;gap:9px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow)}
@@ -122,16 +122,15 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </div>
 <header>
 <div class="container nav">
-<div class="brand">
+<button class="brand" type="button" data-go="home" aria-label="Kembali ke Beranda">
 <img class="logo" src="https://cews.bmkg.go.id/tempatirk/interface/logo_bmkg.png" alt="Logo resmi BMKG Indonesia">
 <span>BMKG<small>STASIUN GEOFISIKA KELAS 1 DELI SERDANG</small>
 </span>
-</div>
+</button>
 <button class="menu" id="menuBtn" aria-label="Buka menu">☰</button>
 <nav class="links" id="navLinks">
-<button class="active" data-page="home">Beranda</button>
 <button data-page="registration">Pendaftaran</button>
-<button data-page="data-request">Permintaan Data</button>
+<button data-page="data-request">Pelayanan Jasa Geofisika</button>
 <button data-page="complaint">Aduan</button>
 <button data-page="tracking">Cek Status</button>
 <button data-page="contact">Kontak</button>
@@ -144,29 +143,31 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <div class="container">
 <span class="eyebrow">Pelayanan publik digital</span>
 <h1>Layanan Informasi & Data<br>Geofisika Terpadu</h1>
-<p>Ajukan kunjungan, permintaan data, atau laporan kondisi di sekitar Anda dengan mudah dan transparan.</p>
-<button class="btn orange" data-go="data-request">Ajukan permintaan data →</button>
+<p>Ajukan kunjungan, Pelayanan Jasa Geofisika, atau laporan kondisi di sekitar Anda dengan mudah dan transparan.</p>
+<button class="btn orange" data-go="data-request">Ajukan pelayanan jasa →</button>
 </div>
 </div>
 <div class="container">
 <div class="grid3 quick">
 <article class="card">
 <div class="icon">🏫</div>
-<h3>Daftar Kunjungan</h3>
-<p>Kunjungan edukasi, magang/PKL, atau penelitian.</p>
+<h3>Permohonan Kunjungan</h3>
+<p>Pengajuan magang, PKL, penelitian, atau kunjungan edukasi.</p>
 <button class="btn" data-go="registration">Mulai pendaftaran</button>
 </article>
 <article class="card">
 <div class="icon">◉</div>
-<h3>Minta Data Geofisika</h3>
-<p>Permohonan data gempa bumi dan petir.</p>
-<button class="btn" data-go="data-request">Minta data</button>
+<h3>Pelayanan Jasa Geofisika</h3>
+<p>Permohonan layanan geofisika gempa bumi dan petir.</p>
+<button class="btn" data-go="data-request">Ajukan pelayanan</button>
 </article>
-<article class="card">
-<div class="icon">⚑</div>
-<h3>Aduan Masyarakat</h3>
-<p>Sampaikan kondisi atau kejadian di wilayah Anda.</p>
-<button class="btn" data-go="complaint">Kirim aduan</button>
+<article class="card dummy">
+<span class="dummy-label">TEMPLATE SEMENTARA</span>
+<div class="icon">▧</div>
+<h3>Template & Pembayaran</h3>
+<p>Template surat, template dokumen, dan placeholder barcode pembayaran akan tersedia di sini setelah dokumen resmi diberikan.</p>
+<small class="muted">[Dummy] Surat Permohonan · [Dummy] Dokumen Pembayaran · [Dummy] Barcode Pembayaran</small>
+<button class="btn" type="button" disabled>Segera tersedia</button>
 </article>
 </div>
 <section class="live-section">
@@ -190,6 +191,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="registration" class="page">
 <div class="container">
+<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Pendaftaran Layanan</h2>
 <p>Kunjungan edukasi, magang/PKL, dan penelitian.</p>
@@ -227,8 +229,12 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <input id="regPhone" type="tel" required>
 </div>
 <div class="field">
-<label for="regDate">Tanggal pelaksanaan</label>
-<input id="regDate" type="date" required>
+<label for="regStartDate">Tanggal mulai</label>
+<input id="regStartDate" type="date" required>
+</div>
+<div class="field">
+<label for="regEndDate">Tanggal selesai</label>
+<input id="regEndDate" type="date" required>
 </div>
 <div class="field">
 <label for="regCount">Jumlah peserta</label>
@@ -249,8 +255,9 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="data-request" class="page">
 <div class="container">
+<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
-<h2>Permintaan Data Geofisika</h2>
+<h2>Pelayanan Jasa Geofisika</h2>
 <p>Lengkapi data agar dapat diproses oleh petugas.</p>
 </div>
 <div class="form-layout">
@@ -265,7 +272,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <form class="form-card" id="dataForm">
 <div class="form-grid">
 <div class="field full">
-<label>Jenis data</label>
+<label>Jenis layanan</label>
 <div class="checks">
 <label class="check">
 <input type="checkbox" name="dataType" value="Gempa Bumi">Gempa Bumi</label>
@@ -274,16 +281,12 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </div>
 </div>
 <div class="field">
-<label for="startDate">Tanggal mulai</label>
+<label for="startDate">Tanggal awal</label>
 <input id="startDate" type="date" required>
 </div>
 <div class="field">
-<label for="endDate">Tanggal selesai</label>
-<input id="endDate" type="date" required>
-</div>
-<div class="field">
-<label for="area">Wilayah / koordinat</label>
-<input id="area" required>
+<label for="area">Lokasi</label>
+<input id="area" required placeholder="Desa/Kecamatan/Kabupaten atau titik lokasi">
 </div>
 <div class="field">
 <label for="purpose">Tujuan penggunaan</label>
@@ -315,12 +318,12 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <input id="dataPhone" type="tel" required>
 </div>
 <div class="field">
-<label for="supportFile">Lain-lain</label>
+<label for="supportFile">Surat Permohonan</label>
 <input id="supportFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
 </div>
 </div>
 <div class="form-actions">
-<button class="btn" type="submit">Ajukan permintaan data</button>
+<button class="btn" type="submit">Ajukan Pelayanan Jasa Geofisika</button>
 <small>PDF, JPG, PNG · maks. 5 MB.</small>
 </div>
 </form>
@@ -329,6 +332,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="complaint" class="page">
 <div class="container">
+<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Aduan Masyarakat</h2>
 <p>Laporkan kejadian atau kondisi yang Anda temukan. Untuk keadaan darurat, hubungi layanan darurat setempat terlebih dahulu.</p>
@@ -395,12 +399,13 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="tracking" class="page">
 <div class="container tracking">
+<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Cek Status</h2>
-<p>Masukkan kode pendaftaran, tiket data, atau kode aduan Anda.</p>
+<p>Masukkan kode pendaftaran atau kode Pelayanan Jasa Geofisika Anda.</p>
 </div>
 <div class="track-box">
-<input id="ticketInput" placeholder="Contoh: REG-DS-2026-ABC123 atau ADU-DS-2026-ABC123">
+<input id="ticketInput" placeholder="Contoh: REG-DS-2026-ABC123 atau JGF-DS-2026-ABC123">
 <button class="btn" id="trackBtn">Cek status</button>
 </div>
 <div class="timeline" id="timeline">
@@ -411,8 +416,8 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <span class="status-pill" id="statusPill">Memuat</span> <span class="muted" id="updatedText">
 </span>
 </p>
-<div class="step done">
-<b>Permohonan diterima</b>Permohonan sudah tercatat di sistem.</div>
+<p class="muted" id="ticketDetail"></p>
+<div class="step done"><b>Permohonan diterima</b>Permohonan sudah tercatat di sistem.</div>
 <div class="step current">
 <b id="statusTitle">Status admin</b>
 <span id="statusNote">Memuat informasi.</span>
@@ -422,11 +427,19 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <span>
 </span>
 </div>
+<div class="status-files" id="statusFiles"></div>
+<div class="file-panel hide" id="paymentProofPanel">
+<b>Upload bukti pembayaran</b>
+<p class="muted">Unggah JPG, PNG, atau PDF setelah pembayaran dilakukan.</p>
+<input id="paymentProof" type="file" accept=".pdf,.jpg,.jpeg,.png">
+<button class="btn" id="uploadProof" type="button">Kirim bukti pembayaran</button>
+</div>
 </div>
 </div>
 </section>
 <section id="contact" class="page">
 <div class="container">
+<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Informasi & Kontak</h2>
 <p>Hubungi kami untuk informasi layanan.</p>
@@ -459,7 +472,9 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </p>
 <div class="ticket" id="modalTicket">
 </div>
-<button class="btn" id="modalClose">Tutup</button>
+<button class="modal-close" id="modalClose" type="button" aria-label="Tutup">×</button>
+<p class="copy-note">Salin atau screenshot kode ini untuk cek status.</p>
+<button class="btn" id="copyTicket" type="button">Copy</button>
 </div>
 </div>
 <div class="toast" id="toast">
@@ -469,37 +484,60 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 (() => {
   const $ = id => document.getElementById(id);
   const db = window.supabase.createClient('https://mbxmvlbfucsppjwnpmcb.supabase.co', 'sb_publishable_VL_PnIkZpShaPwo2X-D0ew_K1Z--daE');
-  const ticketKey = 'bmkg-ticket-saya';
+  const ticketKey = 'bmkg-ticket-terakhir';
   const toast = $('toast');
   const warn = message => { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4000); };
-  const showSuccess = (title, text, ticket) => { $('modalTitle').textContent = title; $('modalText').textContent = text; $('modalTicket').textContent = ticket; $('modal').classList.add('show'); };
-  const ticket = prefix => `${prefix}-DS-${new Date().getFullYear()}-${crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0, 6).toUpperCase()}`;
+  const showSuccess = (title, text, code) => { $('modalTitle').textContent = title; $('modalText').textContent = text; $('modalTicket').textContent = code; $('modal').classList.add('show'); };
+  const ticket = prefix => `${prefix}-DS-${new Date().getFullYear()}-${[...crypto.getRandomValues(new Uint32Array(3))].map(n => n.toString(16)).join('').slice(0, 12).toUpperCase()}`;
 
   $('modalClose').onclick = () => $('modal').classList.remove('show');
   $('modal').onclick = event => { if (event.target === $('modal')) $('modal').classList.remove('show'); };
+  $('copyTicket').onclick = async () => {
+    const code = $('modalTicket').textContent;
+    try { await navigator.clipboard.writeText(code); $('copyTicket').textContent = 'Tersalin ✓'; setTimeout(() => $('copyTicket').textContent = 'Copy', 1800); }
+    catch { warn('Tidak dapat menyalin otomatis. Salin kode secara manual.'); }
+  };
   const pages = document.querySelectorAll('.page'), links = document.querySelectorAll('[data-page]'), nav = $('navLinks');
-  const go = id => { pages.forEach(page => page.classList.toggle('active', page.id === id)); links.forEach(link => link.classList.toggle('active', link.dataset.page === id)); nav.classList.remove('show'); scrollTo({ top: 0, behavior: 'smooth' }); };
+  const pageNames = [...pages].map(page => page.id);
+  const render = id => { id = pageNames.includes(id) ? id : 'home'; pages.forEach(page => page.classList.toggle('active', page.id === id)); links.forEach(link => link.classList.toggle('active', link.dataset.page === id)); nav.classList.remove('show'); scrollTo({ top: 0, behavior: 'smooth' }); };
+  const go = (id, push = true) => { render(id); if (push) history.pushState({ bmkgPage: id }, '', `${location.pathname}#${id}`); };
+  const route = () => render(location.hash.slice(1) || 'home');
+  history.replaceState({ bmkgPage: location.hash.slice(1) || 'home' }, '', `${location.pathname}#${location.hash.slice(1) || 'home'}`);
+  window.addEventListener('popstate', route);
   links.forEach(link => link.onclick = () => go(link.dataset.page));
   document.querySelectorAll('[data-go]').forEach(button => button.onclick = () => go(button.dataset.go));
+  document.querySelectorAll('[data-back]').forEach(button => button.onclick = () => history.state?.bmkgPage && history.state.bmkgPage !== 'home' ? history.back() : go('home'));
   $('menuBtn').onclick = () => nav.classList.toggle('show');
 
+  const allowedFile = file => file && file.size <= 5 * 1024 * 1024 && /^(application\/pdf|image\/jpeg|image\/png)$/.test(file.type);
+  async function uploadApplicantFile(file, code) {
+    if (!file) return null;
+    if (!allowedFile(file)) throw new Error('Berkas harus PDF/JPG/PNG dengan ukuran maksimal 5 MB.');
+    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path = `${code}/${crypto.randomUUID()}-${safe}`;
+    const { error } = await db.storage.from('dokumen-pemohon').upload(path, file, { contentType: file.type });
+    if (error) throw error;
+    return db.storage.from('dokumen-pemohon').getPublicUrl(path).data.publicUrl;
+  }
   const submit = (prefix, title, type) => async event => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) return form.reportValidity();
     const selected = [...form.querySelectorAll('input[name="dataType"]:checked')].map(input => input.value);
     if (type === 'data' && !selected.length) return warn('Pilih minimal satu jenis data.');
-    if (type === 'data' && $('startDate').value > $('endDate').value) return warn('Tanggal selesai harus setelah tanggal mulai.');
+    if (type === 'registration' && $('regStartDate').value > $('regEndDate').value) return warn('Tanggal selesai harus setelah tanggal mulai.');
     const code = ticket(prefix);
     const file = type === 'registration' ? $('regFile').files[0] : type === 'data' ? $('supportFile').files[0] : $('complaintFile').files[0];
     const row = type === 'registration'
-      ? { ticket: code, request_type: 'pendaftaran', nama: $('regName').value, email: $('regEmail').value, no_hp: $('regPhone').value, instansi: $('regName').value, jenis_pendaftaran: $('regType').value, tanggal_mulai: $('regDate').value, file_name: file?.name || null, status: 'Menunggu Verifikasi' }
+      ? { ticket: code, request_type: 'pendaftaran', nama: $('regName').value, email: $('regEmail').value, no_hp: $('regPhone').value, instansi: $('regName').value, jenis_pendaftaran: $('regType').value, tanggal_mulai: $('regStartDate').value, tanggal_selesai: $('regEndDate').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
       : type === 'data'
-        ? { ticket: code, request_type: 'permintaan_data', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, tanggal_selesai: $('endDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Proses Verifikasi' }
+        ? { ticket: code, request_type: 'pelayanan_jasa_geofisika', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
         : { ticket: code, request_type: 'aduan', nama: $('complaintName').value, email: $('complaintEmail').value, no_hp: $('complaintPhone').value, kategori_aduan: $('complaintType').value, wilayah: $('complaintLocation').value, tanggal_mulai: $('complaintDate').value, uraian_aduan: $('complaintText').value, file_name: file?.name || null, status: 'Diterima' };
     const button = form.querySelector('[type="submit"]');
     const label = button.textContent;
     button.disabled = true; button.textContent = 'Mengirim…';
+    try { row.supporting_document_url = await uploadApplicantFile(file, code); }
+    catch (error) { button.disabled = false; button.textContent = label; return warn('Dokumen gagal diunggah: ' + error.message); }
     const { error } = await db.from('service_requests').insert(row);
     button.disabled = false; button.textContent = label;
     if (error) return warn('Data gagal dikirim: ' + error.message);
@@ -508,7 +546,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     form.reset();
   };
   $('registrationForm').addEventListener('submit', submit('REG', 'Pendaftaran terkirim', 'registration'));
-  $('dataForm').addEventListener('submit', submit('REQ-DATA', 'Permintaan data terkirim', 'data'));
+  $('dataForm').addEventListener('submit', submit('JGF', 'Pelayanan Jasa Geofisika terkirim', 'data'));
   $('complaintForm').addEventListener('submit', submit('ADU', 'Aduan terkirim', 'complaint'));
 
   async function track() {
@@ -518,25 +556,53 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     const request = data?.[0];
     if (error || !request) return warn('Kode tiket tidak ditemukan.');
     $('ticketValue').textContent = request.ticket;
+    $('ticketDetail').textContent = request.request_type === 'pendaftaran'
+      ? `Jenis pendaftaran: ${request.jenis_pendaftaran || '—'}`
+      : `Pelayanan Jasa Geofisika · ${request.jenis_data?.join(', ') || '—'} · Lokasi: ${request.wilayah || '—'}`;
     $('updatedText').textContent = `Diperbarui: ${new Date(request.updated_at).toLocaleString('id-ID')}`;
     $('statusPill').textContent = request.status;
-    $('statusPill').className = 'status-pill wait';
+    $('statusPill').className = `status-pill ${/selesai|terverifikasi/i.test(request.status) ? 'ok' : /ditolak/i.test(request.status) ? 'no' : 'wait'}`;
     $('statusTitle').textContent = `Status: ${request.status}`;
     $('statusNote').textContent = request.catatan_admin || 'Belum ada catatan dari admin.';
     const reply = $('replyStep');
-    reply.className = 'step';
-    reply.innerHTML = '<b>Hasil atau jawaban belum tersedia</b><span>Admin masih memproses permintaan Anda.</span>';
-    if (request.response_file_url) {
-      reply.classList.add('done');
-      reply.innerHTML = '<b>Hasil permintaan tersedia</b><a class="btn" target="_blank" rel="noopener">Unduh hasil / jawaban PDF</a>';
-      reply.querySelector('a').href = request.response_file_url;
-    }
+    const isRegistration = request.request_type === 'pendaftaran';
+    reply.className = `step ${/selesai/i.test(request.status) ? 'done' : ''}`;
+    reply.innerHTML = isRegistration
+      ? '<b>Catatan Admin</b><span>Catatan atau arahan dari petugas ditampilkan pada tahap status di atas.</span>'
+      : '<b>Hasil pelayanan</b><span>Hasil akan tersedia setelah pembayaran diverifikasi dan layanan selesai diproses.</span>';
+    const files = $('statusFiles'); files.innerHTML = '';
+    $('paymentProofPanel').classList.add('hide');
+    if (!isRegistration) {
+      const addFile = (label, url) => { if (url) files.insertAdjacentHTML('beforeend', `<a class="btn" target="_blank" rel="noopener" href="${url}">${label}</a>`); };
+      if (request.payment_info || request.payment_amount) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Informasi pembayaran</b><span>${request.payment_info || 'Silakan ikuti informasi dari admin.'}${request.payment_amount ? ` · Nominal: Rp${Number(request.payment_amount).toLocaleString('id-ID')}` : ''}</span></div>`);
+      addFile('Unduh informasi pembayaran', request.payment_document_url);
+      if (request.payment_barcode_url) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Barcode pembayaran</b><img alt="Barcode pembayaran" src="${request.payment_barcode_url}" style="display:block;max-width:180px;margin-top:8px"></div>`);
+      else if (/menunggu pembayaran|pembayaran dikirim/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Placeholder barcode pembayaran</b><span>Barcode resmi belum diunggah petugas. Ini adalah tampilan dummy sementara.</span></div>');
+      if (!request.payment_document_url && /menunggu pembayaran|pembayaran dikirim/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Template informasi pembayaran (dummy)</b><span>Dokumen PDF resmi akan dapat diunduh setelah diunggah petugas.</span></div>');
+      addFile('Unduh hasil pelayanan', request.service_result_url || request.response_file_url);
+      if (/menunggu pembayaran|pembayaran dikirim/i.test(request.status) && !request.payment_proof_url) $('paymentProofPanel').classList.remove('hide');
+      if (request.payment_proof_url) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Bukti pembayaran sudah dikirim</b><span>Menunggu verifikasi petugas.</span></div>');
+    } else if (request.response_file_url) files.insertAdjacentHTML('beforeend', `<a class="btn" target="_blank" rel="noopener" href="${request.response_file_url}">Unduh lampiran jawaban</a>`);
     $('timeline').classList.add('show');
   }
   const savedTicket = localStorage.getItem(ticketKey);
   if (savedTicket) $('ticketInput').value = savedTicket;
   $('trackBtn').onclick = track;
   $('ticketInput').onkeydown = event => { if (event.key === 'Enter') track(); };
+  $('uploadProof').onclick = async () => {
+    const code = $('ticketInput').value.trim().toUpperCase(), file = $('paymentProof').files[0];
+    if (!code || !file) return warn('Masukkan kode dan pilih bukti pembayaran terlebih dahulu.');
+    if (!allowedFile(file)) return warn('Bukti harus PDF/JPG/PNG dengan ukuran maksimal 5 MB.');
+    const button = $('uploadProof'); button.disabled = true; button.textContent = 'Mengunggah…';
+    try {
+      const path = `${code}/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+      const up = await db.storage.from('bukti-pembayaran').upload(path, file, { contentType: file.type }); if (up.error) throw up.error;
+      const url = db.storage.from('bukti-pembayaran').getPublicUrl(path).data.publicUrl;
+      const { error } = await db.rpc('kirim_bukti_pembayaran', { kode: code, url_bukti: url }); if (error) throw error;
+      warn('Bukti pembayaran berhasil dikirim untuk diverifikasi.'); track();
+    } catch (error) { warn('Bukti gagal dikirim: ' + error.message); }
+    finally { button.disabled = false; button.textContent = 'Kirim bukti pembayaran'; }
+  };
   $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article>';
   $('feedPrev').onclick = () => $('liveFeed').scrollBy({ left: -$('liveFeed').clientWidth * .8, behavior: 'smooth' });
   $('feedNext').onclick = () => $('liveFeed').scrollBy({ left: $('liveFeed').clientWidth * .8, behavior: 'smooth' });
