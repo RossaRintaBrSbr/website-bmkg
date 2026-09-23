@@ -412,16 +412,8 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </span>
 </p>
 <p class="muted" id="ticketDetail"></p>
-<div class="step done"><b>Permohonan diterima</b>Permohonan sudah tercatat di sistem.</div>
-<div class="step current">
-<b id="statusTitle">Status admin</b>
-<span id="statusNote">Memuat informasi.</span>
-</div>
-<div class="step" id="replyStep">
-<b>Hasil atau jawaban belum tersedia</b>
-<span>
-</span>
-</div>
+<div class="step done"><b>Permohonan diterima</b><span>Permohonan sudah tercatat di sistem.</span></div>
+<div id="dynamicSteps"></div>
 <div class="status-files" id="statusFiles"></div>
 <div class="file-panel hide" id="paymentProofPanel">
 <b>Upload bukti pembayaran</b>
@@ -557,14 +549,35 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     $('updatedText').textContent = `Diperbarui: ${new Date(request.updated_at).toLocaleString('id-ID')}`;
     $('statusPill').textContent = request.status;
     $('statusPill').className = `status-pill ${/selesai|terverifikasi/i.test(request.status) ? 'ok' : /ditolak/i.test(request.status) ? 'no' : 'wait'}`;
-    $('statusTitle').textContent = `Status: ${request.status}`;
-    $('statusNote').textContent = request.catatan_admin || 'Belum ada catatan dari admin.';
-    const reply = $('replyStep');
     const isRegistration = request.request_type === 'pendaftaran';
-    reply.className = `step ${/selesai/i.test(request.status) ? 'done' : ''}`;
-    reply.innerHTML = isRegistration
-      ? '<b>Catatan Admin</b><span>Catatan atau arahan dari petugas ditampilkan pada tahap status di atas.</span>'
-      : '<b>Hasil pelayanan</b><span>Hasil akan tersedia setelah pembayaran diverifikasi dan layanan selesai diproses.</span>';
+    const stepHtml = (cls, title, note) => `<div class="step ${cls}"><b>${title}</b><span>${note}</span></div>`;
+    const dyn = $('dynamicSteps');
+    if (isRegistration) {
+      const done = /selesai/i.test(request.status);
+      dyn.innerHTML = stepHtml(done ? 'done' : 'current', `Status: ${request.status}`, request.catatan_admin || 'Belum ada catatan dari admin.');
+    } else {
+      const STAGES = ['Permohonan Diterima', 'Menunggu Pembayaran', 'Pembayaran Dikirim', 'Pembayaran Terverifikasi', 'Data/Permohonan Diproses', 'Selesai'];
+      const idx = STAGES.findIndex(s => s.toLowerCase() === (request.status || '').trim().toLowerCase());
+      if (/ditolak/i.test(request.status)) {
+        dyn.innerHTML = stepHtml('current', 'Status: Ditolak', request.catatan_admin || 'Permohonan tidak dapat diproses lebih lanjut.');
+      } else if (idx === -1) {
+        dyn.innerHTML = stepHtml('current', `Status: ${request.status}`, request.catatan_admin || 'Belum ada catatan dari admin.');
+      } else {
+        const hasResult = !!(request.service_result_url || request.response_file_url);
+        const nodes = [
+          { reached: idx >= 1, label: 'Menunggu Pembayaran', note: 'Silakan lakukan pembayaran sesuai informasi dari admin di bawah ini.' },
+          { reached: idx >= 3, label: 'Pembayaran Diverifikasi', note: idx === 2 ? 'Bukti pembayaran sudah dikirim, menunggu verifikasi petugas.' : 'Pembayaran telah diverifikasi oleh petugas.' },
+          { reached: idx >= 4, label: 'Sedang Diproses', note: 'Permohonan sedang diproses oleh petugas.' },
+          { reached: hasResult, label: 'Hasil pelayanan', note: hasResult ? 'Hasil pelayanan sudah tersedia, silakan unduh di bawah ini.' : 'Hasil akan tersedia setelah layanan selesai diproses.' },
+          { reached: idx >= 5, label: 'Status: Selesai', note: request.catatan_admin || 'Permohonan telah selesai diproses.' }
+        ];
+        let currentSet = false;
+        dyn.innerHTML = nodes.map(n => {
+          const cls = n.reached ? 'done' : (currentSet ? '' : (currentSet = true, 'current'));
+          return stepHtml(cls, n.label, n.note);
+        }).join('');
+      }
+    }
     const files = $('statusFiles'); files.innerHTML = '';
     $('paymentProofPanel').classList.add('hide');
     if (!isRegistration) {
@@ -572,11 +585,9 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
       if (request.payment_info || request.payment_amount) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Informasi pembayaran</b><span>${request.payment_info || 'Silakan ikuti informasi dari admin.'}${request.payment_amount ? ` · Nominal: Rp${Number(request.payment_amount).toLocaleString('id-ID')}` : ''}</span></div>`);
       addFile('Unduh informasi pembayaran', request.payment_document_url);
       if (request.payment_barcode_url) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Barcode pembayaran</b><img alt="Barcode pembayaran" src="${request.payment_barcode_url}" style="display:block;max-width:180px;margin-top:8px"></div>`);
-      else if (/menunggu pembayaran|pembayaran dikirim/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Placeholder barcode pembayaran</b><span>Barcode resmi belum diunggah petugas. Ini adalah tampilan dummy sementara.</span></div>');
-      if (!request.payment_document_url && /menunggu pembayaran|pembayaran dikirim/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Template informasi pembayaran (dummy)</b><span>Dokumen PDF resmi akan dapat diunduh setelah diunggah petugas.</span></div>');
       addFile('Unduh hasil pelayanan', request.service_result_url || request.response_file_url);
       if (/menunggu pembayaran|pembayaran dikirim/i.test(request.status) && !request.payment_proof_url) $('paymentProofPanel').classList.remove('hide');
-      if (request.payment_proof_url) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Bukti pembayaran sudah dikirim</b><span>Menunggu verifikasi petugas.</span></div>');
+      if (request.payment_proof_url && !/terverifikasi|diproses|selesai/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Bukti pembayaran sudah dikirim</b><span>Menunggu verifikasi petugas.</span></div>');
     } else if (request.response_file_url) files.insertAdjacentHTML('beforeend', `<a class="btn" target="_blank" rel="noopener" href="${request.response_file_url}">Unduh lampiran jawaban</a>`);
     $('timeline').classList.add('show');
   }
