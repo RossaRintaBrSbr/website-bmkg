@@ -37,7 +37,7 @@ h3{color:var(--navy);margin:0 0 7px}
 .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .btn.orange{background:var(--orange);color:#27343b}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.quick{margin-top:-31px;position:relative}.quick .dummy{border-top-color:#94a8b5}.dummy-label{display:inline-block;padding:3px 8px;border-radius:99px;background:#edf2f5;color:#496477;font-size:11px;font-weight:800}
+.quick{margin-top:-31px;position:relative}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 17px #002b490d}
 .quick .card{border-top:4px solid var(--blue)}
 .quick .card:nth-child(2){border-color:var(--orange)}
@@ -73,7 +73,7 @@ textarea{min-height:95px;resize:vertical}
 .checks{display:flex;flex-wrap:wrap;gap:8px}
 .check{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:8px;cursor:pointer}
 .check input{width:auto}
-.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}.page-back{margin-bottom:18px;background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none}.status-files{display:grid;gap:10px;margin-top:18px}.file-panel{padding:14px;border:1px dashed #a8bfce;border-radius:9px;background:#f7fbfd}.file-panel b{display:block;color:var(--navy)}.modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;color:#36576b;font-size:25px;line-height:1;box-shadow:none;padding:4px}.modal-card{position:relative}.copy-note{font-size:12px;color:var(--muted);margin:0 0 10px}.hide{display:none!important}
+.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}.status-files{display:grid;gap:10px;margin-top:18px}.file-panel{padding:14px;border:1px dashed #a8bfce;border-radius:9px;background:#f7fbfd}.file-panel b{display:block;color:var(--navy)}.modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;color:#36576b;font-size:25px;line-height:1;box-shadow:none;padding:4px}.modal-card{position:relative}.copy-note{font-size:12px;color:var(--muted);margin:0 0 10px}.hide{display:none!important}.template-slot{scroll-snap-align:start;min-height:195px;border:1px dashed #b9cbd6;border-radius:14px;background:#fff}
 .form-actions small{color:var(--muted)}
 .tracking{max-width:780px;margin:auto}
 .track-box{display:flex;gap:9px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow)}
@@ -161,13 +161,11 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <p>Permohonan layanan geofisika gempa bumi dan petir.</p>
 <button class="btn" data-go="data-request">Ajukan pelayanan</button>
 </article>
-<article class="card dummy">
-<span class="dummy-label">TEMPLATE SEMENTARA</span>
-<div class="icon">▧</div>
-<h3>Template & Pembayaran</h3>
-<p>Template surat, template dokumen, dan placeholder barcode pembayaran akan tersedia di sini setelah dokumen resmi diberikan.</p>
-<small class="muted">[Dummy] Surat Permohonan · [Dummy] Dokumen Pembayaran · [Dummy] Barcode Pembayaran</small>
-<button class="btn" type="button" disabled>Segera tersedia</button>
+<article class="card">
+<div class="icon">⚑</div>
+<h3>Aduan Masyarakat</h3>
+<p>Sampaikan laporan atau keluhan terkait layanan dan informasi BMKG.</p>
+<button class="btn" data-go="complaint">Buat aduan</button>
 </article>
 </div>
 <section class="live-section">
@@ -181,6 +179,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <h3>Informasi terkini</h3>
 <p>Silakan tunggu sebentar.</p>
 </article>
+<div class="template-slot" aria-label="Area untuk template yang akan diberikan"></div>
 </div>
 <div class="feed-nav">
 <button class="circle" id="feedPrev">‹</button>
@@ -191,7 +190,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="registration" class="page">
 <div class="container">
-<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Pendaftaran Layanan</h2>
 <p>Kunjungan edukasi, magang/PKL, dan penelitian.</p>
@@ -255,7 +253,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="data-request" class="page">
 <div class="container">
-<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Pelayanan Jasa Geofisika</h2>
 <p>Lengkapi data agar dapat diproses oleh petugas.</p>
@@ -332,7 +329,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="complaint" class="page">
 <div class="container">
-<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Aduan Masyarakat</h2>
 <p>Laporkan kejadian atau kondisi yang Anda temukan. Untuk keadaan darurat, hubungi layanan darurat setempat terlebih dahulu.</p>
@@ -399,7 +395,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="tracking" class="page">
 <div class="container tracking">
-<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Cek Status</h2>
 <p>Masukkan kode pendaftaran atau kode Pelayanan Jasa Geofisika Anda.</p>
@@ -439,7 +434,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 </section>
 <section id="contact" class="page">
 <div class="container">
-<button class="btn page-back" type="button" data-back>← Kembali</button>
 <div class="section-head">
 <h2>Informasi & Kontak</h2>
 <p>Hubungi kami untuk informasi layanan.</p>
@@ -506,7 +500,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
   window.addEventListener('popstate', route);
   links.forEach(link => link.onclick = () => go(link.dataset.page));
   document.querySelectorAll('[data-go]').forEach(button => button.onclick = () => go(button.dataset.go));
-  document.querySelectorAll('[data-back]').forEach(button => button.onclick = () => history.state?.bmkgPage && history.state.bmkgPage !== 'home' ? history.back() : go('home'));
   $('menuBtn').onclick = () => nav.classList.toggle('show');
 
   const allowedFile = file => file && file.size <= 5 * 1024 * 1024 && /^(application\/pdf|image\/jpeg|image\/png)$/.test(file.type);
@@ -531,13 +524,15 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     const row = type === 'registration'
       ? { ticket: code, request_type: 'pendaftaran', nama: $('regName').value, email: $('regEmail').value, no_hp: $('regPhone').value, instansi: $('regName').value, jenis_pendaftaran: $('regType').value, tanggal_mulai: $('regStartDate').value, tanggal_selesai: $('regEndDate').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
       : type === 'data'
-        ? { ticket: code, request_type: 'pelayanan_jasa_geofisika', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
+        ? { ticket: code, request_type: 'permintaan_data', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, tanggal_selesai: $('startDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
         : { ticket: code, request_type: 'aduan', nama: $('complaintName').value, email: $('complaintEmail').value, no_hp: $('complaintPhone').value, kategori_aduan: $('complaintType').value, wilayah: $('complaintLocation').value, tanggal_mulai: $('complaintDate').value, uraian_aduan: $('complaintText').value, file_name: file?.name || null, status: 'Diterima' };
     const button = form.querySelector('[type="submit"]');
     const label = button.textContent;
     button.disabled = true; button.textContent = 'Mengirim…';
-    try { row.supporting_document_url = await uploadApplicantFile(file, code); }
-    catch (error) { button.disabled = false; button.textContent = label; return warn('Dokumen gagal diunggah: ' + error.message); }
+    if (file) {
+      try { const url = await uploadApplicantFile(file, code); if (url) row.supporting_document_url = url; }
+      catch (error) { warn('Dokumen belum dapat diunggah. Data permohonan tetap dikirim.'); }
+    }
     const { error } = await db.from('service_requests').insert(row);
     button.disabled = false; button.textContent = label;
     if (error) return warn('Data gagal dikirim: ' + error.message);
@@ -603,7 +598,7 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
     } catch (error) { warn('Bukti gagal dikirim: ' + error.message); }
     finally { button.disabled = false; button.textContent = 'Kirim bukti pembayaran'; }
   };
-  $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article>';
+  $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article><div class="template-slot" aria-label="Area untuk template yang akan diberikan"></div>';
   $('feedPrev').onclick = () => $('liveFeed').scrollBy({ left: -$('liveFeed').clientWidth * .8, behavior: 'smooth' });
   $('feedNext').onclick = () => $('liveFeed').scrollBy({ left: $('liveFeed').clientWidth * .8, behavior: 'smooth' });
 })();
