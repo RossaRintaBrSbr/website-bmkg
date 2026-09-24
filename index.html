@@ -4,118 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Layanan Publik BMKG Deli Serdang</title>
-<style>
-:root{--navy:#002b49;--blue:#0072ce;--orange:#f59a16;--green:#198754;--mist:#f4f7fa;--ink:#142c3d;--muted:#607384;--line:#d9e3e9;--shadow:0 14px 34px #002b4917}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--mist);color:var(--ink);font:15px/1.55 Inter,Segoe UI,Arial,sans-serif}
-.container{width:min(1140px,calc(100% - 36px));margin:auto}
-.topline{height:5px;background:linear-gradient(90deg,#13a8e8 0 28%,#fff 28% 37%,#2b9d4f 37% 65%,#fff 65% 74%,var(--orange) 74%)}
-header{position:sticky;top:0;z-index:10;background:#fffffff2;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:850;line-height:1.15;border:0;background:transparent;cursor:pointer;text-align:left;padding:0}
-.brand small{display:block;font-size:10px;color:var(--muted)}
-.logo{width:46px;height:46px;object-fit:contain;flex:none}
-.links{display:flex;gap:2px}
-.links button,.menu{border:0;background:transparent;color:#315064;font:inherit;font-weight:700;padding:9px;border-radius:7px;cursor:pointer}
-.links button:hover,.links button.active{color:var(--blue);background:#e8f4fc}
-.menu{display:none;font-size:22px}
-.page{display:none;padding:40px 0 62px;animation:in .3s}
-.page.active{display:block}
-@keyframes in{from{opacity:0;transform:translateY(8px)}
-to{opacity:1;transform:none}
-}
-.hero{background:linear-gradient(120deg,#002b49eF,#0066a4dc),radial-gradient(#30b6ed 1px,transparent 1px);background-size:auto,23px 23px;color:#fff;min-height:398px;display:grid;align-items:center}
-.hero>div{padding:62px 0}
-.eyebrow{color:#c8edff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.eyebrow:before{content:"";display:inline-block;width:25px;height:3px;background:var(--orange);vertical-align:middle;margin-right:8px}
-h1{font-size:clamp(32px,5vw,51px);line-height:1.1;margin:13px 0 16px}
-h2{font-size:clamp(25px,4vw,33px);line-height:1.2;color:var(--navy);margin:0 0 8px}
-h3{color:var(--navy);margin:0 0 7px}
-.hero p{font-size:17px;max-width:650px;color:#d8ecf6}
-.btn{border:0;border-radius:8px;background:var(--blue);color:white;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:7px;box-shadow:0 4px 12px #0072ce33}
-.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.btn.orange{background:var(--orange);color:#27343b}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.quick{margin-top:-31px;position:relative}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 17px #002b490d}
-.quick .card{border-top:4px solid var(--blue)}
-.quick .card:nth-child(2){border-color:var(--orange)}
-.quick .card:nth-child(3){border-color:var(--green)}
-.icon{font-size:27px}
-.muted,.card p{color:var(--muted)}
-.quick .btn{width:100%;margin-top:7px}
-.live-section{margin-top:42px}
-.section-head{text-align:center;max-width:700px;margin:0 auto 25px}
-.live-feed{display:grid;grid-auto-flow:column;grid-auto-columns:calc(50% - 9px);overflow:auto;scroll-snap-type:x mandatory;gap:18px;padding:2px 2px 12px;scroll-behavior:smooth}
-.live-feed::-webkit-scrollbar{height:8px}
-.live-feed::-webkit-scrollbar-thumb{background:#bfd2df;border-radius:9px}
-.alert-card{scroll-snap-align:start;min-height:195px;background:var(--navy);color:#fff;border-radius:14px;padding:24px}
-.alert-card.warning{background:#8b3f00}
-.alert-card h3{color:#fff}
-.alert-card .source{color:#c8e8f8;font-size:12px;font-weight:700}
-.alert-card p{margin:9px 0}
-.alert-card a{color:#fff;font-weight:800}
-.feed-nav{display:flex;gap:8px;justify-content:flex-end;margin:6px 0}
-.circle{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;font-size:20px}
-.form-layout{display:grid;grid-template-columns:275px 1fr;gap:24px}
-.side{background:var(--navy);color:#dcecf5;border-radius:14px;padding:23px;height:max-content}
-.side h3{color:#fff}
-.side li{margin:8px 0}
-.form-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:27px;box-shadow:var(--shadow)}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.field{display:grid;gap:6px}
-.full{grid-column:1/-1}
-label{font-weight:750;color:#29495d;font-size:14px}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd9e1;border-radius:7px;font:inherit;color:var(--ink);background:white}
-input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px #dceffa}
-textarea{min-height:95px;resize:vertical}
-.checks{display:flex;flex-wrap:wrap;gap:8px}
-.check{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:8px;cursor:pointer}
-.check input{width:auto}
-.form-actions{margin-top:22px;display:flex;gap:12px;align-items:center}.status-files{display:grid;gap:10px;margin-top:18px}.file-panel{padding:14px;border:1px dashed #a8bfce;border-radius:9px;background:#f7fbfd}.file-panel b{display:block;color:var(--navy)}.modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;color:#36576b;font-size:25px;line-height:1;box-shadow:none;padding:4px}.modal-card{position:relative}.copy-note{font-size:12px;color:var(--muted);margin:0 0 10px}.hide{display:none!important}.template-slot{scroll-snap-align:start;min-height:195px;border:1px dashed #b9cbd6;border-radius:14px;background:#fff}
-.form-actions small{color:var(--muted)}
-.tracking{max-width:780px;margin:auto}
-.track-box{display:flex;gap:9px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow)}
-.track-box input{border:0}
-.timeline{display:none;margin-top:25px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:27px}
-.timeline.show{display:block}
-.status-pill{display:inline-block;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:800;background:#eef2f5;color:#476071}
-.status-pill.wait{background:#fff3d4;color:#7d5600}
-.status-pill.ok{background:#dff5e7;color:#17623c}
-.status-pill.no{background:#ffe2e6;color:#94233a}
-.step{padding:0 0 22px 31px;border-left:2px solid #cddae2;position:relative;color:var(--muted)}
-.step:last-of-type{border:0}
-.step:before{content:"";position:absolute;left:-8px;top:2px;width:12px;height:12px;border-radius:50%;background:#a7b7c1;border:3px solid white;box-shadow:0 0 0 2px #a7b7c1}
-.step.done:before{background:var(--green);box-shadow:0 0 0 2px var(--green)}
-.step.current:before{background:var(--orange);box-shadow:0 0 0 2px var(--orange)}
-.step b{display:block;color:var(--navy)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.contact-row{padding:14px;border-left:3px solid var(--blue);background:#fff;margin:10px 0}
-.map{border:0;width:100%;min-height:340px;border-radius:14px}
-.modal{display:none;position:fixed;inset:0;z-index:30;place-items:center;background:#001d33aa;padding:20px}
-.modal.show{display:grid}
-.modal-card{width:min(430px,100%);background:#fff;border-radius:15px;padding:29px;text-align:center}
-.ticket{background:#eaf6fd;padding:11px;border-radius:8px;font-size:18px;font-weight:850;margin:15px}
-.toast{display:none;position:fixed;z-index:40;bottom:17px;right:17px;background:#a92339;color:white;padding:12px 15px;border-radius:8px;box-shadow:var(--shadow)}
-.toast.show{display:block}
-footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size:13px}
-@media(max-width:820px){.menu{display:block}
-.links{display:none;position:absolute;left:0;right:0;top:76px;background:#fff;padding:12px 20px;border-bottom:1px solid var(--line);flex-direction:column}
-.links.show{display:flex}
-.links button{text-align:left}
-.grid3,.form-layout,.contact-grid{grid-template-columns:1fr}
-.quick{margin-top:0}
-.live-feed{grid-auto-columns:90%}
-.side{position:static}
-}
-@media(max-width:540px){.form-grid{grid-template-columns:1fr}
-.form-card{padding:19px}
-.form-actions,.track-box{flex-direction:column;align-items:stretch}
-.brand{font-size:13px}
-}
-
-</style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <div class="topline">
@@ -239,8 +128,8 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <input id="regCount" type="number" min="1" required>
 </div>
 <div class="field">
-<label for="regFile">Surat pengantar</label>
-<input id="regFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
+<label for="regFile">Surat Permohonan / Pengantar (wajib)</label>
+<input id="regFile" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
 </div>
 </div>
 <div class="form-actions">
@@ -315,8 +204,8 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <input id="dataPhone" type="tel" required>
 </div>
 <div class="field">
-<label for="supportFile">Surat Permohonan</label>
-<input id="supportFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
+<label for="supportFile">Surat Permohonan (wajib)</label>
+<input id="supportFile" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
 </div>
 </div>
 <div class="form-actions">
@@ -466,153 +355,6 @@ footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size
 <div class="toast" id="toast">
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const db = window.supabase.createClient('https://mbxmvlbfucsppjwnpmcb.supabase.co', 'sb_publishable_VL_PnIkZpShaPwo2X-D0ew_K1Z--daE');
-  const ticketKey = 'bmkg-ticket-terakhir';
-  const toast = $('toast');
-  const warn = message => { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4000); };
-  const showSuccess = (title, text, code) => { $('modalTitle').textContent = title; $('modalText').textContent = text; $('modalTicket').textContent = code; $('modal').classList.add('show'); };
-  const ticket = prefix => `${prefix}-DS-${new Date().getFullYear()}-${[...crypto.getRandomValues(new Uint32Array(3))].map(n => n.toString(16)).join('').slice(0, 12).toUpperCase()}`;
-
-  $('modalClose').onclick = () => $('modal').classList.remove('show');
-  $('modal').onclick = event => { if (event.target === $('modal')) $('modal').classList.remove('show'); };
-  $('copyTicket').onclick = async () => {
-    const code = $('modalTicket').textContent;
-    try { await navigator.clipboard.writeText(code); $('copyTicket').textContent = 'Tersalin ✓'; setTimeout(() => $('copyTicket').textContent = 'Copy', 1800); }
-    catch { warn('Tidak dapat menyalin otomatis. Salin kode secara manual.'); }
-  };
-  const pages = document.querySelectorAll('.page'), links = document.querySelectorAll('[data-page]'), nav = $('navLinks');
-  const pageNames = [...pages].map(page => page.id);
-  const render = id => { id = pageNames.includes(id) ? id : 'home'; pages.forEach(page => page.classList.toggle('active', page.id === id)); links.forEach(link => link.classList.toggle('active', link.dataset.page === id)); nav.classList.remove('show'); scrollTo({ top: 0, behavior: 'smooth' }); };
-  const go = (id, push = true) => { render(id); if (push) history.pushState({ bmkgPage: id }, '', `${location.pathname}#${id}`); };
-  const route = () => render(location.hash.slice(1) || 'home');
-  history.replaceState({ bmkgPage: location.hash.slice(1) || 'home' }, '', `${location.pathname}#${location.hash.slice(1) || 'home'}`);
-  window.addEventListener('popstate', route);
-  links.forEach(link => link.onclick = () => go(link.dataset.page));
-  document.querySelectorAll('[data-go]').forEach(button => button.onclick = () => go(button.dataset.go));
-  $('menuBtn').onclick = () => nav.classList.toggle('show');
-
-  const allowedFile = file => file && file.size <= 5 * 1024 * 1024 && /^(application\/pdf|image\/jpeg|image\/png)$/.test(file.type);
-  async function uploadApplicantFile(file, code) {
-    if (!file) return null;
-    if (!allowedFile(file)) throw new Error('Berkas harus PDF/JPG/PNG dengan ukuran maksimal 5 MB.');
-    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const path = `${code}/${crypto.randomUUID()}-${safe}`;
-    const { error } = await db.storage.from('dokumen-pemohon').upload(path, file, { contentType: file.type });
-    if (error) throw error;
-    return db.storage.from('dokumen-pemohon').getPublicUrl(path).data.publicUrl;
-  }
-  const submit = (prefix, title, type) => async event => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (!form.checkValidity()) return form.reportValidity();
-    const selected = [...form.querySelectorAll('input[name="dataType"]:checked')].map(input => input.value);
-    if (type === 'data' && !selected.length) return warn('Pilih minimal satu jenis data.');
-    if (type === 'registration' && $('regStartDate').value > $('regEndDate').value) return warn('Tanggal selesai harus setelah tanggal mulai.');
-    const code = ticket(prefix);
-    const file = type === 'registration' ? $('regFile').files[0] : type === 'data' ? $('supportFile').files[0] : $('complaintFile').files[0];
-    const row = type === 'registration'
-      ? { ticket: code, request_type: 'pendaftaran', nama: $('regName').value, email: $('regEmail').value, no_hp: $('regPhone').value, instansi: $('regName').value, jenis_pendaftaran: $('regType').value, tanggal_mulai: $('regStartDate').value, tanggal_selesai: $('regEndDate').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
-      : type === 'data'
-        ? { ticket: code, request_type: 'permintaan_data', nama: $('applicant').value, email: $('dataEmail').value, no_hp: $('dataPhone').value, instansi: $('institution').value, nik_nim: $('identity').value, jenis_data: selected, tanggal_mulai: $('startDate').value, tanggal_selesai: $('startDate').value, wilayah: $('area').value, tujuan_penggunaan: $('purpose').value, file_name: file?.name || null, status: 'Permohonan Diterima' }
-        : { ticket: code, request_type: 'aduan', nama: $('complaintName').value, email: $('complaintEmail').value, no_hp: $('complaintPhone').value, kategori_aduan: $('complaintType').value, wilayah: $('complaintLocation').value, tanggal_mulai: $('complaintDate').value, uraian_aduan: $('complaintText').value, file_name: file?.name || null, status: 'Diterima' };
-    const button = form.querySelector('[type="submit"]');
-    const label = button.textContent;
-    button.disabled = true; button.textContent = 'Mengirim…';
-    if (file) {
-      try { const url = await uploadApplicantFile(file, code); if (url) row.supporting_document_url = url; }
-      catch (error) { warn('Dokumen belum dapat diunggah. Data permohonan tetap dikirim.'); }
-    }
-    const { error } = await db.from('service_requests').insert(row);
-    button.disabled = false; button.textContent = label;
-    if (error) return warn('Data gagal dikirim: ' + error.message);
-    localStorage.setItem(ticketKey, code);
-    showSuccess(title, 'Kode tiket juga disimpan di browser ini. Simpan atau foto kode berikut untuk berjaga-jaga.', code);
-    form.reset();
-  };
-  $('registrationForm').addEventListener('submit', submit('REG', 'Pendaftaran terkirim', 'registration'));
-  $('dataForm').addEventListener('submit', submit('JGF', 'Pelayanan Jasa Geofisika terkirim', 'data'));
-  $('complaintForm').addEventListener('submit', submit('ADU', 'Aduan terkirim', 'complaint'));
-
-  async function track() {
-    const code = $('ticketInput').value.trim().toUpperCase();
-    if (!code) return warn('Masukkan kode tiket terlebih dahulu.');
-    const { data, error } = await db.rpc('cek_status_tiket', { kode: code });
-    const request = data?.[0];
-    if (error || !request) return warn('Kode tiket tidak ditemukan.');
-    $('ticketValue').textContent = request.ticket;
-    $('ticketDetail').textContent = request.request_type === 'pendaftaran'
-      ? `Jenis pendaftaran: ${request.jenis_pendaftaran || '—'}`
-      : `Pelayanan Jasa Geofisika · ${request.jenis_data?.join(', ') || '—'} · Lokasi: ${request.wilayah || '—'}`;
-    $('updatedText').textContent = `Diperbarui: ${new Date(request.updated_at).toLocaleString('id-ID')}`;
-    $('statusPill').textContent = request.status;
-    $('statusPill').className = `status-pill ${/selesai|terverifikasi/i.test(request.status) ? 'ok' : /ditolak/i.test(request.status) ? 'no' : 'wait'}`;
-    const isRegistration = request.request_type === 'pendaftaran';
-    const stepHtml = (cls, title, note) => `<div class="step ${cls}"><b>${title}</b><span>${note}</span></div>`;
-    const dyn = $('dynamicSteps');
-    if (isRegistration) {
-      const done = /selesai/i.test(request.status);
-      dyn.innerHTML = stepHtml(done ? 'done' : 'current', `Status: ${request.status}`, request.catatan_admin || 'Belum ada catatan dari admin.');
-    } else {
-      const STAGES = ['Permohonan Diterima', 'Menunggu Pembayaran', 'Pembayaran Dikirim', 'Pembayaran Terverifikasi', 'Data/Permohonan Diproses', 'Selesai'];
-      const idx = STAGES.findIndex(s => s.toLowerCase() === (request.status || '').trim().toLowerCase());
-      if (/ditolak/i.test(request.status)) {
-        dyn.innerHTML = stepHtml('current', 'Status: Ditolak', request.catatan_admin || 'Permohonan tidak dapat diproses lebih lanjut.');
-      } else if (idx === -1) {
-        dyn.innerHTML = stepHtml('current', `Status: ${request.status}`, request.catatan_admin || 'Belum ada catatan dari admin.');
-      } else {
-        const hasResult = !!(request.service_result_url || request.response_file_url);
-        const nodes = [
-          { reached: idx >= 1, label: 'Menunggu Pembayaran', note: 'Silakan lakukan pembayaran sesuai informasi dari admin di bawah ini.' },
-          { reached: idx >= 3, label: 'Pembayaran Diverifikasi', note: idx === 2 ? 'Bukti pembayaran sudah dikirim, menunggu verifikasi petugas.' : 'Pembayaran telah diverifikasi oleh petugas.' },
-          { reached: idx >= 4, label: 'Sedang Diproses', note: 'Permohonan sedang diproses oleh petugas.' },
-          { reached: hasResult, label: 'Hasil pelayanan', note: hasResult ? 'Hasil pelayanan sudah tersedia, silakan unduh di bawah ini.' : 'Hasil akan tersedia setelah layanan selesai diproses.' },
-          { reached: idx >= 5, label: 'Status: Selesai', note: request.catatan_admin || 'Permohonan telah selesai diproses.' }
-        ];
-        let currentSet = false;
-        dyn.innerHTML = nodes.map(n => {
-          const cls = n.reached ? 'done' : (currentSet ? '' : (currentSet = true, 'current'));
-          return stepHtml(cls, n.label, n.note);
-        }).join('');
-      }
-    }
-    const files = $('statusFiles'); files.innerHTML = '';
-    $('paymentProofPanel').classList.add('hide');
-    if (!isRegistration) {
-      const addFile = (label, url) => { if (url) files.insertAdjacentHTML('beforeend', `<a class="btn" target="_blank" rel="noopener" href="${url}">${label}</a>`); };
-      if (request.payment_info || request.payment_amount) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Informasi pembayaran</b><span>${request.payment_info || 'Silakan ikuti informasi dari admin.'}${request.payment_amount ? ` · Nominal: Rp${Number(request.payment_amount).toLocaleString('id-ID')}` : ''}</span></div>`);
-      addFile('Unduh informasi pembayaran', request.payment_document_url);
-      if (request.payment_barcode_url) files.insertAdjacentHTML('beforeend', `<div class="file-panel"><b>Barcode pembayaran</b><img alt="Barcode pembayaran" src="${request.payment_barcode_url}" style="display:block;max-width:180px;margin-top:8px"></div>`);
-      addFile('Unduh hasil pelayanan', request.service_result_url || request.response_file_url);
-      if (/menunggu pembayaran|pembayaran dikirim/i.test(request.status) && !request.payment_proof_url) $('paymentProofPanel').classList.remove('hide');
-      if (request.payment_proof_url && !/terverifikasi|diproses|selesai/i.test(request.status)) files.insertAdjacentHTML('beforeend', '<div class="file-panel"><b>Bukti pembayaran sudah dikirim</b><span>Menunggu verifikasi petugas.</span></div>');
-    } else if (request.response_file_url) files.insertAdjacentHTML('beforeend', `<a class="btn" target="_blank" rel="noopener" href="${request.response_file_url}">Unduh lampiran jawaban</a>`);
-    $('timeline').classList.add('show');
-  }
-  const savedTicket = localStorage.getItem(ticketKey);
-  if (savedTicket) $('ticketInput').value = savedTicket;
-  $('trackBtn').onclick = track;
-  $('ticketInput').onkeydown = event => { if (event.key === 'Enter') track(); };
-  $('uploadProof').onclick = async () => {
-    const code = $('ticketInput').value.trim().toUpperCase(), file = $('paymentProof').files[0];
-    if (!code || !file) return warn('Masukkan kode dan pilih bukti pembayaran terlebih dahulu.');
-    if (!allowedFile(file)) return warn('Bukti harus PDF/JPG/PNG dengan ukuran maksimal 5 MB.');
-    const button = $('uploadProof'); button.disabled = true; button.textContent = 'Mengunggah…';
-    try {
-      const path = `${code}/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
-      const up = await db.storage.from('bukti-pembayaran').upload(path, file, { contentType: file.type }); if (up.error) throw up.error;
-      const url = db.storage.from('bukti-pembayaran').getPublicUrl(path).data.publicUrl;
-      const { error } = await db.rpc('kirim_bukti_pembayaran', { kode: code, url_bukti: url }); if (error) throw error;
-      warn('Bukti pembayaran berhasil dikirim untuk diverifikasi.'); track();
-    } catch (error) { warn('Bukti gagal dikirim: ' + error.message); }
-    finally { button.disabled = false; button.textContent = 'Kirim bukti pembayaran'; }
-  };
-  $('liveFeed').innerHTML = '<article class="alert-card"><span class="source">INFORMASI RESMI BMKG</span><h3>Gempa dan peringatan dini</h3><p>Lihat pembaruan terkini melalui kanal resmi BMKG.</p><a href="https://www.bmkg.go.id" target="_blank" rel="noopener">Buka BMKG.go.id ↗</a></article><div class="template-slot" aria-label="Area untuk template yang akan diberikan"></div>';
-  $('feedPrev').onclick = () => $('liveFeed').scrollBy({ left: -$('liveFeed').clientWidth * .8, behavior: 'smooth' });
-  $('feedNext').onclick = () => $('liveFeed').scrollBy({ left: $('liveFeed').clientWidth * .8, behavior: 'smooth' });
-})();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
