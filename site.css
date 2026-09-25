@@ -92,7 +92,7 @@ textarea{min-height:95px;resize:vertical}
 .ticket{background:#eaf6fd;padding:11px;border-radius:8px;font-size:18px;font-weight:850;margin:15px}
 .toast{display:none;position:fixed;z-index:40;bottom:17px;right:17px;background:#a92339;color:white;padding:12px 15px;border-radius:8px;box-shadow:var(--shadow)}
 .toast.show{display:block}
-footer{background:#001e33;color:#bad0dc;text-align:center;padding:24px;font-size:13px}
+footer{background:#f4f7fa;color:#9aa4ae;text-align:center;padding:22px 16px;font-size:16px}footer a{color:inherit;text-decoration:none}footer a:hover{text-decoration:underline}
 @media(max-width:820px){.menu{display:block}
 .links{display:none;position:absolute;left:0;right:0;top:76px;background:#fff;padding:12px 20px;border-bottom:1px solid var(--line);flex-direction:column}
 .links.show{display:flex}
